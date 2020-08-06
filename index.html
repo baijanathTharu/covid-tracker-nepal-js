@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="./images/icon.png" type="image/x-icon" />
+
+  <!-- google fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto+Slab:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="./mdb/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./mdb/css/mdb.min.css" />
+  <!-- custom css -->
+  <link rel="stylesheet" href="./custom-styles.css" />
+  <title>Nepal Covid Tracker</title>
+</head>
+
+<body>
+  <header class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-2">
+    <h1 class="title text-dark h1-responsive p-2">
+      <a href="./">Nepal Covid Tracker</a>
+    </h1>
+    <div class="search-box d-flex justify-content-between align-items-center py-3 py-sm-0">
+      <input type="text" class="input-group-text bg-white" name="district-name" id="district-name"
+        placeholder="District Name" value="">
+      <i class="fa fa-search px-2 px-sm-2 search-icon" id="search-btn" aria-hidden="true"></i>
+    </div>
+    <div class="date-time px-2 align-self-center" id="date-show"></div>
+  </header>
+  <div class="container-fluid">
+    <!-- alert errors and warnings -->
+    <div id="error"></div>
+    <!-- alert errors and warnings -->
+
+    <!-- preloader -->
+    <div class="d-flex justify-content-center align-items-center" id="preloader">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <!-- preloader -->
+    <div class="row d-md-flex justify-content-center align-items-center">
+      <div class="col-12 col-lg-8 p-4">
+        <h3 class="text-center text-dark p-2" id="name-details"></h3>
+        <!-- preloader search -->
+        <div class="d-flex justify-content-center align-items-center" id="preloader1">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <!-- preloader -->
+        <div class="row d-sm-flex">
+          <div class="covid-details recovered col-12 col-sm-6 col-md-3 p-4 text-center">
+            <h3>Recovered</h3>
+            <p class="num h4-responsive recovered-num" id="recovered-nepal">
+            </p>
+          </div>
+          <div class="covid-details death col-12 col-sm-6 col-md-3 p-4 text-center">
+            <h3>Death</h3>
+            <p class="num h4-responsive death-num" id="death-nepal">
+            </p>
+          </div>
+          <div class="covid-details new-cases col-12 col-sm-6 col-md-3 p-4 text-center">
+            <h3>Active Cases</h3>
+            <p class="num h4-responsive new-cases-num" id="active-nepal">
+            </p>
+          </div>
+          <div class="covid-details total-cases col-12 col-sm-6 col-md-3 p-4 text-center">
+            <h3>Total Cases</h3>
+            <p class="num h4-responsive total-cases-num" id="total-cases-nepal">
+            </p>
+          </div>
+        </div>
+        <h3 class="tests text-center p-2 text-dark">Testings in Nepal</h3>
+        <div class="row d-sm-flex">
+          <div class="covid-details recovered col-12 col-sm-6 col-md-4 p-4 text-center">
+            <h3>Tested Negative</h3>
+            <p class="num h4-responsive recovered-num" id="negative-nepal">
+            </p>
+          </div>
+          <div class="covid-details death col-12 col-sm-6 col-md-4 p-4 text-center">
+            <h3>Tested Positive</h3>
+            <p class="num h4-responsive death-num" id="positive-nepal">
+            </p>
+          </div>
+          <div class="covid-details new-cases col-12 col-sm-6 col-md-4 p-4 text-center">
+            <h3>Total Tests</h3>
+            <p class="num h4-responsive new-cases-num" id="total-tests-nepal">
+
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4 p-4 text-dark">
+        <div class="total-tests mb-4 text-center">
+          <h3>Test Chart</h3>
+        </div>
+        <canvas class="" id="labelChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row d-md-flex justify-content-center">
+      <div class="col-12 col-md-8 p-2">
+        <!-- Line Graph -->
+        <div class="my-4 line-graph">
+          <h3 class="text-center p-4">Timeline of Total Cases in Nepal</h3>
+          <canvas class="" id="lineChart1"></canvas>
+        </div>
+        <!-- Bar Graph -->
+        <div class="my-4 bar-graph">
+          <h3 class="text-center p-4">Covid Cases In Different Provinces</h3>
+          <canvas id="horizontalBar"></canvas>
+        </div>
+        <!-- Table start -->
+        <div class="table my-4">
+          <h3 class="text-center p-2">District Wise Covid Cases</h3>
+          <table id="table-covid" class="table table-responsive-sm table-striped table-bordered table-sm my-4"
+            cellspacing="0">
+            <thead>
+              <tr>
+                <th class="th-sm table-name">Name</th>
+                <th class="th-sm total-cases">Total Cases</th>
+                <th class="th-sm new-cases">Active Cases</th>
+                <th class="th-sm recovered">Recovered</th>
+                <th class="th-sm death">Deaths</th>
+              </tr>
+            </thead>
+            <tbody id="covid-table">
+            </tbody>
+          </table>
+        </div>
+        <!-- Table end -->
+        <!-- World Covid Tracker -->
+        <div class="world-covid-tracker my-4">
+          <h3 class="text-center">World Covid Tracker</h3>
+          <div class="row d-sm-flex">
+            <div class="covid-details recovered col-12 col-sm-6 col-md-3 p-4 text-center">
+              <h3>Recovered</h3>
+              <p class="num h4-responsive recovered-num" id="recovered-world">
+              </p>
+            </div>
+            <div class="covid-details death col-12 col-sm-6 col-md-3 p-4 text-center">
+              <h3>Death</h3>
+              <p class="num h4-responsive death-num" id="death-world">
+              </p>
+            </div>
+            <div class="covid-details new-cases col-12 col-sm-6 col-md-3 p-4 text-center">
+              <h3>New Cases</h3>
+              <p class="num h4-responsive new-cases-num" id="active-world">
+              </p>
+            </div>
+            <div class="covid-details total-cases col-12 col-sm-6 col-md-3 p-4 text-center">
+              <h3>Total Cases</h3>
+              <p class="num h4-responsive total-cases-num" id="total-cases-world">
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4 news my-0 my-sm-4">
+        <h3 class="text-center p-2">Covid News</h3>
+        <div class="news-articles my-2" id="covid-news">
+          <!-- Insert News Here -->
+        </div>
+        <div class="covid-myths my-2">
+          <h3 class="text-center p-2">Covid Myths</h3>
+          <div class="myth-cards">
+            <!-- Insert Cards here -->
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <p>Nepal Covid Tracker By <a href="http://github.com/baijanaththaru">Baijanath Tharu</a></p>
+      <p>Data Fetched From <a href="http://nepalcorona.info">NepalCorona.info</a></p>
+    </div>
+  </footer>
+  <script src="./mdb/js/popper.min.js"></script>
+  <script src="./mdb/js/jquery.min.js"></script>
+  <script src="./mdb/js/bootstrap.min.js"></script>
+  <script src="./mdb/js/mdb.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+
+</html>
