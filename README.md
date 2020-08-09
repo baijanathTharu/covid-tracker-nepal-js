@@ -1,16 +1,18 @@
-#Nepal Covid Tracker
+# Nepal Covid Tracker
+
 This is a VanillaJs web app made for tracking the covid cases in Nepal. The data is fetched from [NepalCorona.info](https://www.NepalCorona.info).
 
-##Demo
+## Demo
+
 You can get the demo of this web at [netlify-site](https://angry-cori-5b93ac.netlify.app/).
 
-##Technologies Used
+## Technologies Used
 
 1. Material Design for Bootstrap for line graphs, bar graphs and pie-charts.
 2. Bootstrap4 for styling
 3. VanillaJs for fetching data and for frontend.
 
-##Fetatures
+## Fetatures
 
 1. Summary of Cases in Nepal and World
 2. Testing Details shown in a pie-chart.
