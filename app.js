@@ -125,42 +125,38 @@ function displaySummaryResult(result) {
     type: "horizontalBar",
     data: {
       labels: graphLabels,
-      datasets: [
-        {
-          label: "No. of Active Cases",
-          data: graphData,
-          fill: true,
-          backgroundColor: [
-            "rgba(255, 99, 132)",
-            "rgba(255, 159, 64)",
-            "rgba(255, 205, 86)",
-            "rgba(75, 192, 192)",
-            "rgba(54, 162, 235)",
-            "rgba(153, 102, 255)",
-            "rgba(221, 203, 207)",
-          ],
-          borderColor: [
-            "rgb(255, 99, 132)",
-            "rgb(255, 159, 64)",
-            "rgb(255, 205, 86)",
-            "rgb(75, 192, 192)",
-            "rgb(54, 162, 235)",
-            "rgb(153, 102, 255)",
-            "rgb(221, 203, 207)",
-          ],
-          borderWidth: 1,
-        },
-      ],
+      datasets: [{
+        label: "No. of Active Cases",
+        data: graphData,
+        fill: true,
+        backgroundColor: [
+          "rgba(255, 99, 132)",
+          "rgba(255, 159, 64)",
+          "rgba(255, 205, 86)",
+          "rgba(75, 192, 192)",
+          "rgba(54, 162, 235)",
+          "rgba(153, 102, 255)",
+          "rgba(221, 203, 207)",
+        ],
+        borderColor: [
+          "rgb(255, 99, 132)",
+          "rgb(255, 159, 64)",
+          "rgb(255, 205, 86)",
+          "rgb(75, 192, 192)",
+          "rgb(54, 162, 235)",
+          "rgb(153, 102, 255)",
+          "rgb(221, 203, 207)",
+        ],
+        borderWidth: 1,
+      }, ],
     },
     options: {
       scales: {
-        xAxes: [
-          {
-            ticks: {
-              beginAtZero: true,
-            },
+        xAxes: [{
+          ticks: {
+            beginAtZero: true,
           },
-        ],
+        }, ],
       },
     },
   });
@@ -197,13 +193,11 @@ function displayTestDetails(result) {
     type: "pie",
     data: {
       labels: ["Negative", "Positive"],
-      datasets: [
-        {
-          data: [result.tested_negative, result.tested_positive],
-          backgroundColor: ["#00C851", "#ff4444"],
-          hoverBackgroundColor: ["#007E33", "#CC0000"],
-        },
-      ],
+      datasets: [{
+        data: [result.tested_negative, result.tested_positive],
+        backgroundColor: ["#00C851", "#ff4444"],
+        hoverBackgroundColor: ["#007E33", "#CC0000"],
+      }, ],
     },
     options: {
       responsive: true,
@@ -263,15 +257,13 @@ function drawLineGraph(result) {
     type: "line",
     data: {
       labels: xLabels,
-      datasets: [
-        {
-          label: "Total Cases",
-          data: totalCases,
-          backgroundColor: ["rgba(223, 6, 6, 0.2)"],
-          borderColor: ["rgba(223, 6, 6)"],
-          borderWidth: 2,
-        },
-      ],
+      datasets: [{
+        label: "Total Cases",
+        data: totalCases,
+        backgroundColor: ["rgba(223, 6, 6, 0.2)"],
+        borderColor: ["rgba(223, 6, 6)"],
+        borderWidth: 2,
+      }, ],
     },
     options: {
       responsive: true,
@@ -365,13 +357,13 @@ function displayTable(districtList) {
 
     // Fetching district details
     fetch(
-      `https://data.nepalcorona.info/api/v1/districts/${district.id}`,
-      requestOptions
-    )
+        `https://data.nepalcorona.info/api/v1/districts/${district.id}`,
+        requestOptions
+      )
       .then((response) => response.json())
       .then(
         (result) =>
-          (tableRow.innerHTML = `
+        (tableRow.innerHTML = `
         <td>${district.title}</td>
         <td class="bg-primary text-white">${result.covid_summary.cases}</td>
         <td>${result.covid_summary.active}</td>
@@ -407,9 +399,9 @@ function displayDistrictResult(result) {
 function searchDistrict(districtName) {
   // console.log(districtName);
   fetch(
-    `https://data.nepalcorona.info/api/v1/districts?search=${districtName}`,
-    requestOptions
-  )
+      `https://data.nepalcorona.info/api/v1/districts?search=${districtName}`,
+      requestOptions
+    )
     .then((response) => response.json())
     .then((result) =>
       // fetching the details from the id
@@ -417,9 +409,9 @@ function searchDistrict(districtName) {
         `https://data.nepalcorona.info/api/v1/districts/${result[0].id}`,
         requestOptions
       )
-        .then((response) => response.json())
-        .then((result) => displayDistrictResult(result))
-        .catch((error) => displayError(error))
+      .then((response) => response.json())
+      .then((result) => displayDistrictResult(result))
+      .catch((error) => displayError(error))
     )
     .catch((error) => displayError(error));
 }

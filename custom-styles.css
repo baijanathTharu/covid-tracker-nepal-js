@@ -81,6 +81,7 @@ h3 {
   height: 0.25rem;
   background-color: var(--main-recovered-color);
 }
+
 .death::before {
   content: " ";
   display: block;
@@ -96,6 +97,7 @@ h3 {
   height: 0.25rem;
   background-color: var(--main-new-cases-color);
 }
+
 .total-cases::before {
   content: " ";
   display: block;
@@ -105,7 +107,7 @@ h3 {
 }
 
 .num {
-  font-size: var(--main-font-small);
+  font-size: var(--main-font-medium);
 }
 
 .total-tests::before {
@@ -115,6 +117,7 @@ h3 {
   height: 0.25rem;
   background-color: #19990d;
 }
+
 .recovered-num {
   color: var(--main-recovered-color);
 }
@@ -136,6 +139,7 @@ tr {
   text-align: center;
   font-size: 2rem;
 }
+
 .table-name::before {
   content: " ";
   display: block;
@@ -143,6 +147,7 @@ tr {
   height: 0.25rem;
   background-color: var(--main-black-color);
 }
+
 .table-id::before {
   content: " ";
   display: block;
