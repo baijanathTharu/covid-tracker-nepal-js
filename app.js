@@ -6,6 +6,19 @@ function selectIds(idName) {
 
 const errorContainer = selectIds("error");
 
+const takeMeUp = selectIds("takeup");
+takeMeUp.addEventListener("click", () => {
+  window.scrollTo(0, 0);
+});
+
+window.addEventListener("scroll", (event) => {
+  if (this.scrollY > 1200) {
+    takeMeUp.style.visibility = "visible";
+  } else {
+    takeMeUp.style.visibility = "hidden";
+  }
+});
+
 // Display errors
 function displayError(error) {
   if (error == "TypeError: Cannot read property 'id' of undefined") {

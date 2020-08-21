@@ -18,6 +18,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: rgb(255, 255, 255);
 }
@@ -141,4 +145,22 @@ article {
 h4 {
   font-weight: 500;
   font-size: var(--main-font-medium);
+}
+
+.takeMeUp {
+  visibility: hidden;
+  height: 50px;
+  width: 50px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 1.5rem;
+  z-index: 100;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(128, 0, 128, 0.7);
+}
+
+.takeMeUp:hover {
+  background-color: purple;
 }
