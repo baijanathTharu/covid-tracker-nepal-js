@@ -59,6 +59,43 @@ const months = [
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
 
+// Request option for fetching
+let requestOptions = {
+  method: "GET",
+  redirect: "follow",
+};
+
+// Adding commas for better readability
+function appendCommas(val) {
+  string = val.toString();
+  let strLen = string.length;
+  let required = "";
+  if (strLen > 3) {
+    required = string[strLen - 3] + string[strLen - 2] + string[strLen - 1];
+    for (let i = strLen - 4; i >= 0; i--) {
+      if (strLen % 2 === 0) {
+        if (i % 2 === 0) {
+          required = string[i] + "," + required;
+        } else {
+          required = string[i] + required;
+        }
+      } else {
+        let compare = i + 1;
+        if (compare % 2 === 0) {
+          required = string[i] + "," + required;
+        } else {
+          required = string[i] + required;
+        }
+      }
+    }
+  } else {
+    required = string;
+  }
+  return required;
+}
+
+// console.log(appendCommas("47124"));
+
 // Showing date and time
 function dateAndTime() {
   const todayDate = new Date();
@@ -73,7 +110,6 @@ function dateAndTime() {
 
 setInterval(dateAndTime, 1000);
 
-// Displaying cases summary
 const casesSummary = {
   recoveredNepal: selectIds("recovered-nepal"),
   deathNepal: selectIds("death-nepal"),
@@ -90,10 +126,10 @@ const casesSummaryWorld = {
 
 // Display World tracking Details
 function displayWorldDetails(result) {
-  casesSummaryWorld.recoveredWorld.textContent = result.recovered;
-  casesSummaryWorld.deathWorld.textContent = result.deaths;
-  casesSummaryWorld.activeWorld.textContent = result.active;
-  casesSummaryWorld.totalCasesWorld.textContent = result.cases;
+  casesSummaryWorld.recoveredWorld.textContent = appendCommas(result.recovered);
+  casesSummaryWorld.deathWorld.textContent = appendCommas(result.deaths);
+  casesSummaryWorld.activeWorld.textContent = appendCommas(result.active);
+  casesSummaryWorld.totalCasesWorld.textContent = appendCommas(result.cases);
 }
 
 // Fetching world details
@@ -104,12 +140,19 @@ fetch("https://data.nepalcorona.info/api/v1/world", requestOptions)
 
 // console.log(casesSummary);
 
+// Displaying cases summary
 function displaySummaryResult(result) {
-  casesSummary.recoveredNepal.textContent = result.current_state[2].count;
-  casesSummary.deathNepal.textContent = result.current_state[0].count;
-  casesSummary.activeNepal.textContent = result.current_state[1].count;
-  casesSummary.totalCasesNepal.textContent = result.total;
-  nameDetails.textContent = "Nepal";
+  casesSummary.recoveredNepal.textContent = appendCommas(
+    result.current_state[2].count
+  );
+  casesSummary.deathNepal.textContent = appendCommas(
+    result.current_state[0].count
+  );
+  casesSummary.activeNepal.textContent = appendCommas(
+    result.current_state[1].count
+  );
+  casesSummary.totalCasesNepal.textContent = appendCommas(result.total);
+  // nameDetails.textContent = "Nepal";
   // console.log(result);
 
   // Bar Graph
@@ -125,49 +168,48 @@ function displaySummaryResult(result) {
     type: "horizontalBar",
     data: {
       labels: graphLabels,
-      datasets: [{
-        label: "No. of Active Cases",
-        data: graphData,
-        fill: true,
-        backgroundColor: [
-          "rgba(255, 99, 132)",
-          "rgba(255, 159, 64)",
-          "rgba(255, 205, 86)",
-          "rgba(75, 192, 192)",
-          "rgba(54, 162, 235)",
-          "rgba(153, 102, 255)",
-          "rgba(221, 203, 207)",
-        ],
-        borderColor: [
-          "rgb(255, 99, 132)",
-          "rgb(255, 159, 64)",
-          "rgb(255, 205, 86)",
-          "rgb(75, 192, 192)",
-          "rgb(54, 162, 235)",
-          "rgb(153, 102, 255)",
-          "rgb(221, 203, 207)",
-        ],
-        borderWidth: 1,
-      }, ],
+      datasets: [
+        {
+          label: "No. of Active Cases",
+          data: graphData,
+          fill: true,
+          backgroundColor: [
+            "rgba(255, 99, 132)",
+            "rgba(255, 159, 64)",
+            "rgba(255, 205, 86)",
+            "rgba(75, 192, 192)",
+            "rgba(54, 162, 235)",
+            "rgba(153, 102, 255)",
+            "rgba(221, 203, 207)",
+          ],
+          borderColor: [
+            "rgb(255, 99, 132)",
+            "rgb(255, 159, 64)",
+            "rgb(255, 205, 86)",
+            "rgb(75, 192, 192)",
+            "rgb(54, 162, 235)",
+            "rgb(153, 102, 255)",
+            "rgb(221, 203, 207)",
+          ],
+          borderWidth: 1,
+        },
+      ],
     },
     options: {
       scales: {
-        xAxes: [{
-          ticks: {
-            beginAtZero: true,
+        xAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
           },
-        }, ],
+        ],
       },
     },
   });
 }
 
 // Fetching Cases Summary
-var requestOptions = {
-  method: "GET",
-  redirect: "follow",
-};
-
 fetch("https://data.nepalcorona.info/api/v1/covid/summary", requestOptions)
   .then((response) => response.json())
   .then((result) => displaySummaryResult(result))
@@ -182,9 +224,9 @@ const testDetails = {
 };
 
 function displayTestDetails(result) {
-  testDetails.testedNegative.textContent = result.tested_negative;
-  testDetails.testedPositive.textContent = result.tested_positive;
-  testDetails.totalTests.textContent = result.tested_total;
+  testDetails.testedNegative.textContent = appendCommas(result.tested_negative);
+  testDetails.testedPositive.textContent = appendCommas(result.tested_positive);
+  testDetails.totalTests.textContent = appendCommas(result.tested_total);
 
   // pie chart
   const ctxP = document.getElementById("labelChart").getContext("2d");
@@ -193,11 +235,13 @@ function displayTestDetails(result) {
     type: "pie",
     data: {
       labels: ["Negative", "Positive"],
-      datasets: [{
-        data: [result.tested_negative, result.tested_positive],
-        backgroundColor: ["#00C851", "#ff4444"],
-        hoverBackgroundColor: ["#007E33", "#CC0000"],
-      }, ],
+      datasets: [
+        {
+          data: [result.tested_negative, result.tested_positive],
+          backgroundColor: ["#00C851", "#ff4444"],
+          hoverBackgroundColor: ["#007E33", "#CC0000"],
+        },
+      ],
     },
     options: {
       responsive: true,
@@ -257,13 +301,15 @@ function drawLineGraph(result) {
     type: "line",
     data: {
       labels: xLabels,
-      datasets: [{
-        label: "Total Cases",
-        data: totalCases,
-        backgroundColor: ["rgba(223, 6, 6, 0.2)"],
-        borderColor: ["rgba(223, 6, 6)"],
-        borderWidth: 2,
-      }, ],
+      datasets: [
+        {
+          label: "Total Cases",
+          data: totalCases,
+          backgroundColor: ["rgba(223, 6, 6, 0.2)"],
+          borderColor: ["rgba(223, 6, 6)"],
+          borderWidth: 2,
+        },
+      ],
     },
     options: {
       responsive: true,
@@ -282,16 +328,19 @@ fetch("https://data.nepalcorona.info/api/v1/covid/timeline", requestOptions)
 function displayNews(result) {
   const covidNews = document.querySelector("#covid-news");
   let countNews = 0;
-  while (countNews < 10) {
+  while (countNews < 15) {
     let articleFrame = document.createElement("article");
     articleFrame.className = "row my-2 covid-news";
     covidNews.appendChild(articleFrame);
     articleFrame.innerHTML = `
-        <div class="article-image col-12 col-md-4">
-        <a href="${result.data[countNews].url}" target="_blank"><img src="${
+        <div class="article-image col-12 col-md-4 m-md-0">
+        <a href="${result.data[countNews].url}"  target="_blank"><img src="${
       result.data[countNews].image_url
     }"
-            alt="Article image" class="" /></a>
+            alt="Article image" class="" height="" /></a>
+            <div class="news-date"><p class="text-sm-center text-primary">${result.data[
+              countNews
+            ].updated_at.slice(0, 10)}</p></div>
         </div>
         <div class="article-details py-2 py-md-0 d-flex flex-column col-12 col-md-8">
           <div class="article-title">
@@ -299,10 +348,12 @@ function displayNews(result) {
               <a href="${result.data[countNews].url}" target="_blank">${
       result.data[countNews].title
     }</a>
-            </h4>
-          </div>
-          <div class="article-summary">
-            <p>${result.data[countNews].summary.slice(0, 100)}</p>
+            </h4><span><p>${result.data[countNews].summary.slice(
+              0,
+              100
+            )} <a href=${
+      result.data[countNews].url
+    } target="_blank">Read more<i class="fa fa-angle-double-right"></i></a></p></span>
           </div>
         </div>
     `;
@@ -324,7 +375,7 @@ function displayMyths(result) {
   const mythCards = document.querySelector(".myth-cards");
   // console.log(result);
   let countCard = 0;
-  while (countCard < 5) {
+  while (countCard < 3) {
     let newCard = document.createElement("article");
     newCard.className = "card";
     mythCards.appendChild(newCard);
@@ -357,13 +408,13 @@ function displayTable(districtList) {
 
     // Fetching district details
     fetch(
-        `https://data.nepalcorona.info/api/v1/districts/${district.id}`,
-        requestOptions
-      )
+      `https://data.nepalcorona.info/api/v1/districts/${district.id}`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then(
         (result) =>
-        (tableRow.innerHTML = `
+          (tableRow.innerHTML = `
         <td>${district.title}</td>
         <td class="bg-primary text-white">${result.covid_summary.cases}</td>
         <td>${result.covid_summary.active}</td>
@@ -399,9 +450,9 @@ function displayDistrictResult(result) {
 function searchDistrict(districtName) {
   // console.log(districtName);
   fetch(
-      `https://data.nepalcorona.info/api/v1/districts?search=${districtName}`,
-      requestOptions
-    )
+    `https://data.nepalcorona.info/api/v1/districts?search=${districtName}`,
+    requestOptions
+  )
     .then((response) => response.json())
     .then((result) =>
       // fetching the details from the id
@@ -409,9 +460,9 @@ function searchDistrict(districtName) {
         `https://data.nepalcorona.info/api/v1/districts/${result[0].id}`,
         requestOptions
       )
-      .then((response) => response.json())
-      .then((result) => displayDistrictResult(result))
-      .catch((error) => displayError(error))
+        .then((response) => response.json())
+        .then((result) => displayDistrictResult(result))
+        .catch((error) => displayError(error))
     )
     .catch((error) => displayError(error));
 }

@@ -43,9 +43,9 @@
       </div>
     </div>
     <!-- preloader -->
-    <div class="row d-md-flex justify-content-center align-items-center">
+    <div class="row d-md-flex justify-content-center align-items-center mx-sm-2">
       <div class="col-12 col-lg-8 p-4">
-        <h3 class="text-center text-dark p-2" id="name-details"></h3>
+        <h3 class="text-center text-dark p-0" id="name-details"></h3>
         <!-- preloader search -->
         <div class="d-flex justify-content-center align-items-center" id="preloader1">
           <div class="spinner-border" role="status">
@@ -54,7 +54,7 @@
         </div>
         <!-- preloader -->
         <div class="row d-sm-flex">
-          <div class="covid-details recovered col-12 col-sm-6 col-md-3 p-4 text-center">
+          <div class="covid-details my-2 my-sm-0 recovered col-12 col-sm-6 col-md-3 p-4 text-center">
             <h3>Recovered</h3>
             <p class="num h4-responsive recovered-num" id="recovered-nepal">
             </p>
@@ -75,7 +75,7 @@
             </p>
           </div>
         </div>
-        <h3 class="tests text-center p-2 text-dark">Testings in Nepal</h3>
+        <h3 class="tests text-center p-2 text-dark">Testings</h3>
         <div class="row d-sm-flex">
           <div class="covid-details recovered col-12 col-sm-6 col-md-4 p-4 text-center">
             <h3>Tested Negative</h3>
@@ -90,12 +90,11 @@
           <div class="covid-details new-cases col-12 col-sm-6 col-md-4 p-4 text-center">
             <h3>Total Tests</h3>
             <p class="num h4-responsive new-cases-num" id="total-tests-nepal">
-
             </p>
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-4 p-4 text-dark">
+      <div class="pie-chart col-12 col-md-4 p-4 text-dark">
         <div class="total-tests mb-4 text-center">
           <h3>Test Chart</h3>
         </div>
@@ -104,7 +103,23 @@
     </div>
   </div>
   <div class="container-fluid">
-    <div class="row d-md-flex justify-content-center">
+    <div class="row d-md-flex justify-content-center m-sm-2">
+      <!-- News and myths -->
+      <div class="col-12 col-md-4 news my-0 my-sm-4">
+        <h3 class="text-center p-2">Covid News</h3>
+        <div class="news-articles my-2" id="covid-news">
+          <!-- Insert News Here -->
+        </div>
+        <div class="covid-myths my-2">
+          <h3 class="text-center p-2">Covid Myths</h3>
+          <div class="myth-cards">
+            <!-- Insert Cards here -->
+            </article>
+          </div>
+        </div>
+      </div>
+      <!-- News and myths -->
+      <!-- table container -->
       <div class="col-12 col-md-8 p-2">
         <!-- Line Graph -->
         <div class="my-4 line-graph">
@@ -138,7 +153,7 @@
         <!-- World Covid Tracker -->
         <div class="world-covid-tracker my-4">
           <h3 class="text-center">World Covid Tracker</h3>
-          <div class="row d-sm-flex">
+          <div class="row mx-2 mx-sm-0 d-sm-flex">
             <div class="covid-details recovered col-12 col-sm-6 col-md-3 p-4 text-center">
               <h3>Recovered</h3>
               <p class="num h4-responsive recovered-num" id="recovered-world">
@@ -159,20 +174,6 @@
               <p class="num h4-responsive total-cases-num" id="total-cases-world">
               </p>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-4 news my-0 my-sm-4">
-        <h3 class="text-center p-2">Covid News</h3>
-        <div class="news-articles my-2" id="covid-news">
-          <!-- Insert News Here -->
-        </div>
-        <div class="covid-myths my-2">
-          <h3 class="text-center p-2">Covid Myths</h3>
-          <div class="myth-cards">
-            <!-- Insert Cards here -->
-            </article>
           </div>
         </div>
       </div>

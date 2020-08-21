@@ -74,48 +74,20 @@ h3 {
   color: var(--main-black-color);
 }
 
-.recovered::before {
-  content: " ";
-  display: block;
-  width: auto;
-  height: 0.25rem;
-  background-color: var(--main-recovered-color);
-}
-
-.death::before {
-  content: " ";
-  display: block;
-  width: auto;
-  height: 0.25rem;
-  background-color: var(--main-death-color);
-}
-
-.new-cases::before {
-  content: " ";
-  display: block;
-  width: auto;
-  height: 0.25rem;
-  background-color: var(--main-new-cases-color);
-}
-
-.total-cases::before {
-  content: " ";
-  display: block;
-  width: auto;
-  height: 0.25rem;
-  background-color: var(--main-total-cases-color);
+.covid-details {
+  border: 1px solid #eee;
+  box-shadow: 0px 2px 5px #ccc;
+  border-radius: 15px;
 }
 
 .num {
   font-size: var(--main-font-medium);
 }
 
-.total-tests::before {
-  content: " ";
-  display: block;
-  width: auto;
-  height: 0.25rem;
-  background-color: #19990d;
+.pie-chart {
+  border: 1px solid #eee;
+  box-shadow: 0px 2px 5px #ccc;
+  border-radius: 10px;
 }
 
 .recovered-num {
@@ -135,25 +107,28 @@ h3 {
 }
 
 /* Table css */
+table {
+  position: relative;
+}
+
+th {
+  top: 0;
+  position: sticky;
+  background-color: rgb(238, 238, 238, 0.9);
+}
 tr {
   text-align: center;
   font-size: 2rem;
 }
 
-.table-name::before {
-  content: " ";
-  display: block;
-  width: auto;
-  height: 0.25rem;
-  background-color: var(--main-black-color);
-}
+/* article */
 
-.table-id::before {
-  content: " ";
-  display: block;
-  width: auto;
-  height: 0.25rem;
-  background-color: var(--main-black-color);
+article {
+  border: 1px solid #eee;
+  box-shadow: 0px 2px 5px #ccc;
+  padding: 10px;
+  min-height: 200px;
+  min-width: 200px;
 }
 
 /* Article image */
