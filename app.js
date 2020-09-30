@@ -159,10 +159,10 @@ function displaySummaryResult(result) {
     result.current_state[2].count
   );
   casesSummary.deathNepal.textContent = appendCommas(
-    result.current_state[0].count
+    result.current_state[1].count
   );
   casesSummary.activeNepal.textContent = appendCommas(
-    result.current_state[1].count
+    result.current_state[0].count
   );
   casesSummary.totalCasesNepal.textContent = appendCommas(result.total);
   // nameDetails.textContent = "Nepal";
