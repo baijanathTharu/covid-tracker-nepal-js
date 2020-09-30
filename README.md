@@ -4,7 +4,7 @@ This is a VanillaJs web app made for tracking the covid cases in Nepal. The data
 
 ## Demo
 
-You can get the demo of this web at [netlify-site](https://angry-cori-5b93ac.netlify.app/).
+You can get the demo of this web at [netlify-site](https://nepalcovidstat.netlify.app/).
 
 ## Technologies Used
 
